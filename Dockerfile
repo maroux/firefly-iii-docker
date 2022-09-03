@@ -17,4 +17,6 @@ RUN curl -SL https://github.com/firefly-iii/firefly-iii/archive/$VERSION.tar.gz 
 
 COPY alerts.json /var/www/html/resources/alerts.json
 
+RUN find $FIREFLY_III_PATH -name '*.php' -print0 | xargs -0 -I^ sed -i '' \"s/'LIKE'/'ILIKE'/g\" '^'
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
